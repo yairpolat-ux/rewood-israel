@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="YR Polat — רהיטים ואובייקטים מעץ ממוחזר, עבודת יד מישראל. כל פריט הוא יחיד במינו." name="description"/>
+  <meta content="YR Polat" name="author"/>
+  <meta content="YR Polat | עץ ממוחזר · עבודת יד · ישראל" property="og:title"/>
+  <meta content="רהיטים ואובייקטים מעץ ממוחזר, עבודת יד מישראל." property="og:description"/>
+  <meta content="website" property="og:type"/>
+  <title>
+   YR Polat | עץ ממוחזר · עבודת יד · ישראל
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700&amp;family=Assistant:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   :root {
+    --wood-dark: #2a1a0a;
+    --wood-mid: #5c3a1e;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --cream: #f5ede0;
+    --font-body: 'Frank Ruhl Libre', serif;
+    --font-ui: 'Assistant', sans-serif;
+    --font-display: 'Frank Ruhl Libre', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  #bg-fixed {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://res.cloudinary.com/docgx6jic/image/upload/v1776014155/Gemini_Generated_Image_6iy5oz6iy5oz6iy5_xtsxjs.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  #hero, #works, #story, #process, #contact {
+    scroll-margin-top: 60px;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--wood-dark);
+
+    color: var(--cream);
+    direction: rtl;
+    overflow-x: hidden;
+  }
+
+  .cat-btn {
+    background: transparent;
+    border: none;
+    color: rgba(245,237,224,0.7);
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.05em;
+  }
+  .cat-btn:hover { color: var(--gold); }
+  .cat-btn.active { background: none; color: var(--gold); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+
+  .work-card.hidden { display: none; }
+
+  /* ─── PRODUCT PAGE ─── */
+  #product-page {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 50;
+    background: var(--wood-dark);
+  }
+  #lang-btn-wrap {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    z-index: 2147483647 !important;
+  }
+
+  #product-page.open { display: block; }
+  .product-back {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--gold);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 55px 0 0 0;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s;
+  }
+  .product-back:hover { opacity: 0.7; }
+  .product-main-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: contain;
+    background: rgba(0,0,0,0.15);
+    margin-bottom: 2rem;
+  }
+  .product-title {
+    font-family: var(--font-body);
+    font-size: 2.2rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .product-sub {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    color: var(--cream);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  .product-desc {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(245,237,224,0.85);
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .product-price {
+    font-family: var(--font-ui);
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  .product-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-right: 1rem;
+    vertical-align: middle;
+  }
+  .product-wa-btn:hover { background: #1ebe5d; transform: scale(1.1); }
+  .product-wa-btn svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    z-index: 100;
+    background: rgba(30, 15, 5, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(200,146,42,0.2);
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1rem 2rem;
+  }
+
+  nav a, .nav-link {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+    position: relative;
+    cursor: pointer;
+  }
+  nav a::after, .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; right: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  nav a:hover, .nav-link:hover { color: var(--gold-light); }
+  nav a:hover::after, .nav-link:hover::after { width: 100%; }
+  nav a.active, .nav-link.active { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 455px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 55px 0 0 0;
+    overflow: hidden;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+  .logo-wrap {
+    margin-bottom: 2rem;
+    animation: fadeDown 1s ease both;
+  }
+
+  .logo-box {
+    display: inline-block;
+    background: #111;
+    border: 2px solid #fff;
+    padding: 1rem 1.5rem 0.8rem;
+    position: relative;
+  }
+
+  .logo-created {
+    font-family: var(--font-ui);
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    color: #aaa;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .logo-yr {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    display: block;
+  }
+
+  .logo-polat {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    color: #fff;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero-title {
+    font-family: var(--font-body);
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .hero-title span { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245,237,224,0.85);
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.9s ease both;
+  }
+
+  .btn-primary {
+    background: none;
+    color: var(--cream);
+    border: none;
+    padding: 55px 0 0 0;
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    display: inline-block;
+    letter-spacing: 0.05em;
+  }
+  .btn-primary:hover { color: var(--gold-light); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border: none;
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.3s;
+  }
+  .btn-ghost:hover { color: var(--gold-light); }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: var(--font-body);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  /* ─── ABOUT / STORY ─── */
+  #story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .story-text p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(245,237,224,0.8);
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .story-text strong { color: var(--gold-light); font-weight: 400; }
+
+  /* ─── WORKS GRID ─── */
+  #works-section {
+    background: transparent;
+    border-top: 1px solid rgba(200,146,42,0.15);
+    border-bottom: 1px solid rgba(200,146,42,0.15);
+    max-width: 100%;
+    padding: 5rem 2rem;
+  }
+
+  #works-section .inner { max-width: 1100px; margin: 0 auto; }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .work-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--wood-mid);
+  }
+
+  .work-card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+    background: rgba(0,0,0,0.15);
+    display: block;
+    transition: transform 0.6s ease;
+    filter: brightness(0.85) sepia(0.1);
+  }
+
+  .work-card:hover img { transform: scale(1.06); filter: brightness(0.7) sepia(0.2); }
+
+  .work-card-info {
+    position: absolute;
+    bottom: 0; right: 0; left: 0;
+    padding: 1.5rem;
+    background: linear-gradient(0deg, rgba(20,10,3,0.95) 0%, transparent 100%);
+    transform: translateY(30%);
+    transition: transform 0.4s ease;
+  }
+
+  .work-card:hover .work-card-info { transform: translateY(0); }
+
+  .work-card-title {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .work-card-sub {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .work-card-price {
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-top: 0.5rem;
+    font-weight: 600;
+  }
+
+  .work-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--gold);
+    color: var(--wood-dark);
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+  }
+
+  /* ─── PROCESS ─── */
+  #process-section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .step {
+    position: relative;
+    padding: 2rem 1.5rem;
+    border: none;
+    text-align: center;
+  }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(200,146,42,0.15);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+
+  .step-title {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    color: var(--cream);
+    margin-bottom: 0.7rem;
+  }
+
+  .step-desc {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    color: rgba(245,237,224,0.6);
+    line-height: 1.7;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact-section {
+    background: transparent;
+    border-top: 1px solid rgba(200,146,42,0.2);
+    max-width: 100%;
+    padding: 5rem 2rem;
+  }
+
+  #contact-section .inner {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,146,42,0.3);
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    padding: 0.9rem 1.2rem;
+    outline: none;
+    transition: border-color 0.3s;
+    direction: rtl;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: rgba(245,237,224,0.75); }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--gold); }
+
+  .contact-form textarea { min-height: 140px; resize: vertical; }
+
+  .contact-form .btn-primary { align-self: center; min-width: 200px; text-align: center; }
+
+  .contact-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-socials a {
+    color: var(--cream);
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+  }
+  .contact-socials a:hover { color: var(--gold); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    color: rgba(245,237,224,0.25);
+    border-top: 1px solid rgba(200,146,42,0.1);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { gap: 1.5rem; padding: 0.9rem 1rem; font-size: 0.85rem; }
+
+    #story {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .story-img-deco { display: none; }
+
+    .works-grid { grid-template-columns: 1fr; }
+
+    .process-steps { grid-template-columns: 1fr 1fr; }
+
+    .hero-btns { flex-direction: column; align-items: center; }
+  }
+
+  @media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; }
+    nav { gap: 1rem; }
+  }
+
+  /* ─── LIGHTBOX ─── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 999999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img {
+    max-width: 95vw;
+    max-height: 92vh;
+    object-fit: contain;
+    cursor: default;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+    background: none;
+    border: none;
+    padding: 0 0.5rem;
+  }
+  #lightbox-close:hover { opacity: 1; }
+  </style>
+ </head>
+ <body>
+  <div id="bg-fixed"></div>
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+   <symbol id="wa-icon" viewbox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
+    </path>
+   </symbol>
+  </svg>
+  <!-- NAVBAR -->
+  <nav id="main-nav">
+   <span class="nav-link" onclick="showPage('story')">
+    הסיפור שלי
+   </span>
+   <span class="nav-link" onclick="showPage('process')">
+    תהליך
+   </span>
+   <span class="nav-link" onclick="showPage('works')">
+    עבודות
+   </span>
+   <span class="nav-link" onclick="showPage('metziot')">
+    מציאות עם סיפור
+   </span>
+   <span class="nav-link" onclick="showPage('contact')">
+    יצירת קשר
+   </span>
+  </nav>
+  <!-- HERO -->
+  <div data-page="hero" id="hero">
+   
+  </div>
+  <!-- STORY -->
+  <div data-page="story" id="story" style="display:none; padding: 5rem 2rem; max-width: 800px; margin: 0 auto; position: relative; z-index: 1">
+   <div class="reveal">
+    <h2 class="section-title">
+     שלום, אני
+     <span>
+      יאיר.
+     </span>
+    </h2>
+    <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); margin-bottom:1.2rem; font-weight:300;">
+     אני אבא גרוש לשלושה ילדים, ויחד עם בת הזוג שלי — הם העוגן, הכוח ומרכז החיים שלי. מתוך המקום הזה של בית, משפחה ואהבה, נולד גם החיבור העמוק שלי ליצירה, לחום ולפריטים שמספרים סיפור.
+    </p>
+    <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); margin-bottom:1.2rem; font-weight:300;">
+     אני משרת במילואים באופן קבוע כבר משנת
+     <strong style="color:var(--gold-light); font-weight:400;">
+      2002
+     </strong>
+     , ומאז תחילת המלחמה השירות הפך לאינטנסיבי במיוחד — בממוצע
+     <strong style="color:var(--gold-light); font-weight:400;">
+      כ־200 ימי מילואים בכל שנת לחימה
+     </strong>
+     בגדוד ההנדסה של חטיבת אלכסנדרוני. במקביל, העסק שלי כהנדימן נפגע קשות וכמעט נעצר לחלוטין.
+    </p>
+    <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); margin-bottom:1.2rem; font-weight:300;">
+     בתוך סבבי המילואים, וברגעים שהייתי חוזר הביתה אל מציאות של חוסר ודאות, מצאתי בעץ את המפלט שלי. ברגעים שבהם הילדים לא היו איתי ובת הזוג הייתה בעבודה —
+     <strong style="color:var(--gold-light); font-weight:400;">
+      העץ היה המקום השקט שלי
+     </strong>
+     . מקום לנשום, ליצור, לפרוק, ולהחזיר לעצמי תחושת יציבות ומשמעות.
+    </p>
+    <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); margin-bottom:1.2rem; font-weight:300;">
+     מה שהתחיל כאהבה ישנה לעץ ולעבודת יד, הפך בתקופה הזו להרבה יותר מתחביב —
+     <strong style="color:var(--gold-light); font-weight:400;">
+      דרך להמשיך לפרנס, להחזיק את הבית, ולבנות מחדש
+     </strong>
+     דווקא מתוך תקופה מורכבת.
+    </p>
+    <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); margin-bottom:1.8rem; font-weight:300;">
+     כל היצירות ב־ReWood Israel מיוצרות מ־100% עץ ממוחזר — ממשטחים, ריהוט ישן, עץ בניין וגזמי עצים. רוב המוצרים ניתנים ל
+     <strong style="color:var(--gold-light); font-weight:400;">
+      התאמה אישית מלאה
+     </strong>
+     — מידות, צבעים ופונקציונליות — בתהליך משותף שמבטיח תוצאה מדויקת ואישית.
+    </p>
+    <div style="padding:0; margin-bottom:2rem;">
+     <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); font-weight:300; margin-bottom:0.5rem;">
+      בשבילי, כל מוצר הוא הרבה יותר מפריט עיצוב.
+     </p>
+     <p style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); font-weight:300; margin-bottom:0;">
+      הוא סיפור של חומר שקיבל חיים חדשים, של עבודת יד ישראלית, ושל מקום שמצאתי בו שקט, יצירה ויכולת לבנות מחדש — גם את העץ, וגם את החיים.
+     </p>
+    </div>
+    <p style="margin-top: 2.5rem; font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.85); font-weight:300;">
+     עץ ישן — חיים חדשים.
+    </p>
+    <div style="margin-top:1.5rem; display:flex; align-items:center; gap:1rem;">
+     <span style="font-family:'Assistant',sans-serif; font-size:1.1rem; font-weight:700; color:var(--cream);">
+      צרו קשר:
+     </span>
+     <button class="product-wa-btn" onclick="window.location.href='https://wa.me/972544982928?text=' + encodeURIComponent('שלום יאיר! ראיתי את האתר שלך ואשמח לשמוע עוד.')">
+      <svg fill="#fff" height="30" viewbox="0 0 24 24" width="30">
+       <use href="#wa-icon">
+       </use>
+      </svg>
+     </button>
+    </div>
+   </div>
+  </div>
+  <!-- WORKS -->
+  <div data-page="works" id="works" style="display:none; background: transparent; position:fixed; top:60px; left:0; right:0; bottom:0; overflow-y:auto; z-index:1;">
+   <section id="works-section" style="max-width:100%; padding: 5rem 2rem;">
+    <div class="inner">
+     <div class="reveal">
+      <h2 class="section-title">
+       <span id="works-title-main">עבודות</span>
+       <span id="works-title-span" style="color:var(--gold);">
+        נבחרות
+       </span>
+      </h2>
+     </div>
+     <!-- CATEGORY TABS -->
+     <div style="display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:2.5rem; justify-content:center;">
+      <button class="cat-btn active" onclick="filterCat('all', this)">
+       הכל
+      </button>
+      <button class="cat-btn" onclick="filterCat('מדפים', this)">
+       מדפים
+      </button>
+      <button class="cat-btn" onclick="filterCat('מעמדי נרות', this)">
+       מעמדי נרות
+      </button>
+      <button class="cat-btn" onclick="filterCat('מנורות', this)">
+       מנורות
+      </button>
+      <button class="cat-btn" onclick="filterCat('ריהוט', this)">
+       ריהוט
+      </button>
+      <button class="cat-btn" onclick="filterCat('לייף סטייל', this)">
+       לייף סטייל
+      </button>
+      <button class="cat-btn" onclick="filterCat('לקוחות מדברים', this)">
+       לקוחות מדברים
+      </button>
+     </div>
+     <div class="works-grid reveal" id="works-grid"></div>
+     <p id="works-disclaimer" style="margin-top:2rem; text-align:center; font-family:var(--font-ui); font-size:0.8rem; color:rgba(120,100,80,0.7); line-height:1.7;">
+      כל המוצרים נראים בדיוק כמו בתמונה · ייתכן שחלקים מסוימים ברקע נערכו ע"י בינה מלאכותית
+     </p>
+     <div style="text-align:center; margin-top:3rem; padding-bottom:2rem;">
+      <p style="font-family:var(--font-ui); font-size:1rem; color:rgba(245,237,224,0.75); margin-bottom:1.2rem;">יש שאלה? רוצים להזמין? דברו איתי ישירות</p>
+      <a href="https://wa.me/972544982928?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%99%D7%90%D7%99%D7%A8!%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93." target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; background:#25D366; border-radius:50%; width:56px; height:56px; text-decoration:none;">
+       <svg fill="#fff" height="30" viewbox="0 0 24 24" width="30"><use href="#wa-icon"></use></svg>
+      </a>
+     </div>
+    </div>
+   </section>
+  </div>
+  <!-- PROCESS -->
+  <div data-page="process" id="process" style="display:none; background: transparent; border-top:1px solid rgba(200,146,42,0.12); border-bottom:1px solid rgba(200,146,42,0.12);">
+   <section id="process-section">
+    <div class="reveal" style="text-align:center;">
+     <div class="section-label" id="process-label">התהליך שלי</div>
+     <h2 class="section-title">
+      <span id="process-title-main">איך זה</span>
+      <span style="color:var(--gold);" id="process-title-span"> עובד?</span>
+     </h2>
+     <div class="divider" style="margin: 0 auto 2rem;"></div>
+     <p id="process-sub" style="font-size:1.05rem; line-height:1.9; color:rgba(245,237,224,0.75); font-weight:300; max-width:600px; margin:0 auto 1rem;">
+      מהרעיון הראשוני ועד למוצר המוכן — כל שלב נעשה ביד ובלב.
+     </p>
+    </div>
+    <div class="process-steps reveal">
+     <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title" id="step1-title">איתור ואיסוף העץ</div>
+      <div class="step-desc" id="step1-desc">כל פרויקט מתחיל בשטח — מחפש, מוצא ואוסף עץ ממוחזר עם אופי: משטחים, ריהוט ישן, קורות בניין וגזמי עצים.</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:1rem;">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776356481/IMG_20260410_103026_661_dso4gg.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776356557/IMG_20260410_143257_352_drykvv.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776356401/IMG_20260410_143251_019_d4aryk.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776356313/IMG_20260415_140742_637_gzcuwd.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+      </div>
+     </div>
+     <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title" id="step2-title">פירוק ועיבוד ראשוני</div>
+      <div class="step-desc" id="step2-desc">העץ עובר פירוק, ניקוי והסרת מסמרים ועצמים אחרים — ואז חיתוך וסידור ראשוני לפי צרכי הפרויקט.</div>
+     </div>
+     <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title" id="step3-title">עבודת יד</div>
+      <div class="step-desc" id="step3-desc">כל חיתוך, ליטוש ועיבוד נעשה ביד, בסדנה הפרטית שלי — ללא פס ייצור.</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin-top:1rem;">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776526363/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E-%D7%94%D7%A0%D7%93%D7%99%D7%9E%D7%9F_%D7%99%D7%90%D7%99%D7%A8_2_on7hv0.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776526487/IMG-20180117-WA0018_o2k37x.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+        <img src="https://res.cloudinary.com/docgx6jic/image/upload/v1776526528/IMG-20191205-WA0000_yfjowb.jpg" style="width:100%; aspect-ratio:1/1; object-fit:cover; filter:brightness(0.85) sepia(0.1);" alt="">
+      </div>
+     </div>
+     <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title" id="step4-title">המוצר אצלכם</div>
+      <div class="step-desc" id="step4-desc">בסיום — משלוח או איסוף עצמי, ומוצר שמגיע עם סיפור ויחיד במינו.</div>
+     </div>
+    </div>
+   </section>
+  </div>
+  <!-- ANTIQUES -->
+  <!-- METZIOT -->
+  <div data-page="metziot" id="metziot" style="display:none; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;">
+   <div class="reveal" style="text-align:center;">
+    <div class="section-label">פריטים מיוחדים</div>
+    <h2 class="section-title">
+     מציאות
+     <span>עם סיפור</span>
+    </h2>
+    <div class="divider" style="margin: 0 auto 2rem;"></div>
+    <p style="font-family:'Assistant',sans-serif; color:var(--cream); font-size:1.05rem; font-weight:600; line-height:1.7; margin-bottom:3rem;">
+     פריטים יחידים במינם — כל אחד עם היסטוריה, אופי וחיים קודמים.
+    </p>
+    <div class="works-grid">
+     <div class="work-card" onclick="openPage('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format','מציאה עם סיפור','עץ ישן ממוחזר','לפרטים צרו קשר',this)">
+      <img alt="מציאה עם סיפור" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format" style="width:100%; height:220px; object-fit:cover;"/>
+      <div class="work-card-info">
+       <div class="work-card-title">מציאה עם סיפור</div>
+       <div class="work-card-sub">עץ ישן ממוחזר</div>
+       <div class="work-card-price">לפרטים צרו קשר</div>
+      </div>
+     </div>
+    </div>
+   </div>
+   </div>
+  </div>
+  <!-- CONTACT -->
+  <div data-page="contact" id="contact" style="display:none;">
+   <section id="contact-section" style="max-width:100%;">
+    <div class="inner reveal">
+     <h2 class="section-title">
+      יש לך
+      <span>
+       רעיון?
+      </span>
+     </h2>
+     <p style="font-family:'Assistant',sans-serif; color:var(--cream); font-size:1.05rem; font-weight:600; line-height:1.7;">
+      הזמינו פריט קיים, או בואו נבנה יחד משהו חדש ומיוחד.
+     </p>
+     <div class="contact-form">
+      <input id="wa-name" placeholder="שם מלא *" required="" type="text"/>
+      <input id="wa-phone" placeholder="טלפון / ווטסאפ *" required="" type="tel"/>
+      <textarea id="wa-message" placeholder="ספרו לי מה אתם מחפשים..."></textarea>
+      <button onclick="sendContactWA()" style="background:none; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:0.7rem; font-family:'Assistant',sans-serif; font-size:1.1rem; font-weight:700; color:var(--cream); margin:0 auto;">
+       <span>
+        שלח לי וואטסאפ
+       </span>
+       <span style="display:inline-flex; align-items:center; justify-content:center; background:#25D366; border-radius:50%; width:42px; height:42px; flex-shrink:0;">
+        <svg fill="#fff" height="22" viewbox="0 0 24 24" width="22">
+         <use href="#wa-icon">
+         </use>
+        </svg>
+       </span>
+      </button>
+     </div>
+     <div class="contact-socials">
+      <a href="https://www.instagram.com/oldwood.newlife" style="display:inline-flex; align-items:center; gap:0.4rem;" target="_blank">
+       <svg fill="currentColor" height="22" viewbox="0 0 24 24" width="22">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z">
+        </path>
+       </svg>
+       Instagram
+      </a>
+      <a href="https://m.facebook.com/100062952202664/" style="display:inline-flex; align-items:center; gap:0.4rem;" target="_blank">
+       <svg fill="currentColor" height="22" viewbox="0 0 24 24" width="22">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+        </path>
+       </svg>
+       Facebook
+      </a>
+     </div>
+    </div>
+   </section>
+  </div>
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <button id="lightbox-close" onclick="closeLightbox()">×</button>
+    <button id="lightbox-prev" onclick="event.stopPropagation(); lightboxNav(-1)" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); background:none; border:none; color:#c8922a; font-size:3rem; cursor:pointer; opacity:1; line-height:1; padding:0 0.5rem; text-shadow:0 0 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7);">&#8250;</button>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+    <button id="lightbox-next" onclick="event.stopPropagation(); lightboxNav(1)" style="position:absolute; right:1rem; top:50%; transform:translateY(-50%); background:none; border:none; color:#c8922a; font-size:3rem; cursor:pointer; opacity:1; line-height:1; padding:0 0.5rem; text-shadow:0 0 6px rgba(0,0,0,0.9), 0 0 12px rgba(0,0,0,0.7);">&#8249;</button>
+  </div>
+
+  <button id="lang-btn" onclick="toggleLang()" style="position:fixed !important; bottom:20px !important; left:20px !important; z-index:2147483647 !important; background:#1e0f05 !important; border:2px solid #c8922a !important; border-radius:4px !important; padding:8px 16px !important; color:#f5ede0 !important; font-family:Assistant,sans-serif !important; font-size:14px !important; font-weight:700 !important; cursor:pointer !important;">EN | עב</button>
+  <!-- PRODUCT PAGE -->
+  <div id="product-page">
+   <div style="max-width:900px; margin:0 auto; padding:2rem 2rem 4rem;">
+   <div style="padding-top:10px;"></div>
+   <img alt="" class="product-main-img" id="ppImg" src="" onclick="openLightbox(this.src, window._currentGallery || [this.src], window._currentGallery ? window._currentGallery.indexOf(this.src) : 0)" style="cursor:zoom-in;"/>
+   <div id="ppGallery" style="display:none; margin-bottom:2rem;">
+    <img alt="" class="product-main-img" id="ppMainImg" src="" style="margin-bottom:0.8rem; cursor:zoom-in;" onclick="openLightbox(this.src, window._currentGallery, window._currentGallery ? window._currentGallery.indexOf(this.src) : 0)"/>
+    <div id="ppThumbs" style="display:flex; gap:0.6rem; flex-wrap:wrap;"></div>
+   </div>
+   <div class="product-title" id="ppTitle">
+   </div>
+   <div class="product-sub" id="ppSub">
+   </div>
+   <div class="product-desc" id="ppDesc">
+   </div>
+   <div class="product-price" id="ppPrice">
+   </div>
+   <div id="ppWaRow" style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+    <span style="font-family:'Assistant',sans-serif; font-size:1.4rem; font-weight:700; color:var(--cream);">
+     לפרטים והזמנה:
+    </span>
+    <button class="product-wa-btn" id="ppWa">
+     <svg fill="#fff" height="30" viewbox="0 0 24 24" width="30">
+      <use href="#wa-icon">
+      </use>
+     </svg>
+    </button>
+   </div>
+   <div style="text-align:center; margin-top:1rem;">
+    <a onclick="closePage()" style="cursor:pointer; display:inline-flex; align-items:center; gap:0.6rem; font-size:1.1rem; font-weight:700; color:var(--cream); text-decoration:none; font-family:'Assistant',sans-serif;">
+     <span style="font-size:2rem; line-height:1; font-weight:900;">
+      ►
+     </span>
+     חזרה לגלריה
+    </a>
+   </div>
+  </div>
+  <!-- FOOTER -->
+  <footer>
+   © 2024 YR POLAT · כל הזכויות שמורות · עץ ממוחזר, עבודת יד, ישראל
+  </footer>
+  <script>
+   // Product descriptions
+  var productDescs = {
+    'מדף צף': 'מדף עץ צף בסגנון כפרי, עשוי מעץ אורן ישן ממוחזר. מתאים לכל חדר — סלון, חדר שינה או מסדרון. ניתן להתאמה אישית במידות ובגוון הצבע.',
+    'מדף כפרי': 'מדף בסגנון כפרי עם מרקם עשיר ואופי ייחודי, עשוי מעץ גולמי ממוחזר. כל מדף הוא יחיד במינו עם סיבים וגוונים שלא יחזרו.',
+    'מעמד נרות': 'מעמד נרות מעוצב מעץ פלטה ממוחזר. מוסיף חמימות ואווירה כפרית לכל פינה בבית.',
+    'מעמד נרות גבוה': 'מעמד נרות גבוה ואלגנטי, עשוי מעץ זית ישן עם גוון עמוק ועשיר. מרשים כפריט עיצוב עצמאי.',
+    'מנורת W': 'מנורת רצפה/קיר בצורת W — עיצוב ייחודי לחלוטין שנבנה מעץ ממוחזר עם נורות וינטאג׳ חמות. כל מנורה מיוצרת לפי הזמנה ואפשר להתאים צבע וגודל.',
+    'מנורת מסגרת': 'מנורת שולחן/רצפה בצורת מסגרת עץ ממוחזר עם רגלי ברזל/עץ ונורת גלוב. שילוב של סגנון כפרי ותעשייתי — מתאים לסלון, פינת קריאה או חדר שינה.',
+    'מנורת עמוד LED': 'מנורת עמוד LED גבוהה עשויה מעץ ממוחזר עם תאורת LED פנימית. נותנת אור חמים ואווירה ייחודית לכל חדר.',
+    'ספסל גינה': 'ספסל גינה איתן ויפה, עשוי מעץ פלטה ממוחזר. מתאים לגינה, מרפסת, כניסה לבית או כפריט עיצובי בסלון.',
+    'שולחן סלון': 'שולחן סלון מרשים עשוי מעץ חרוב ממוחזר. כל שולחן הוא יצירה ייחודית עם סיפור — העץ, הסיבים, הצבע — הכל שמור מהחיים הקודמים של העץ.',
+    'מסגרת תמונה': 'מסגרת תמונה כפרית עשויה מעץ גולמי ממוחזר. מעניקה אופי ייחודי לכל תמונה ומשתלבת בכל סגנון עיצוב.',
+    'קופסת אחסון': 'קופסת אחסון מעץ פלטה ממוחזר — פונקציונלית ויפה. מתאימה לאחסון קטן בכל חדר בבית.',
+    'קונסולה כפרית': 'קונסולה רחבה עם 3 מגירות, עשויה מעץ ממוחזר בגוון לבן ישן. מושלמת לכניסה לבית, לסלון או לחדר השינה. ניתן להתאמה אישית במידות ובצבע.',
+    'מתקן קערות לכלב': 'מתקן קערות מעוצב לכלב, עשוי מעץ ממוחזר עם חריטה אישית של שם הכלב. מתנה מושלמת לאוהבי חיות מחמד. ניתן להתאים לכל שם.',
+    'מציאה עם סיפור': 'פריט ייחודי עם היסטוריה — עץ ישן שקיבל חיים חדשים בעבודת יד. כל שריטה ושפשוף הם חלק מהסיפור שלו.',
+  };
+
+  var productDescsEn = {
+    'מדף צף': 'A floating rustic shelf made from reclaimed old pine. Fits any room — living room, bedroom or hallway. Can be customized in size and color.',
+    'מדף כפרי': 'A rustic shelf with rich texture and unique character, made from raw reclaimed wood. Every shelf is one of a kind — the grain and tones will never repeat.',
+    'מעמד נרות': 'A designed candle holder made from reclaimed pallet wood. Adds warmth and a rustic atmosphere to any corner of your home.',
+    'מעמד נרות גבוה': 'A tall and elegant candle holder made from old olive wood with a deep, rich tone. Striking as a standalone design piece.',
+    'מנורת W': 'A floor/wall lamp in a W shape — a completely unique design built from reclaimed wood with warm vintage bulbs. Every lamp is made to order and can be customized in color and size.',
+    'מנורת מסגרת': 'A table/floor lamp in a reclaimed wood frame shape with iron/wood legs and a globe bulb. A blend of rustic and industrial style — perfect for a living room, reading corner or bedroom.',
+    'מנורת עמוד LED': 'A tall LED pole lamp made from reclaimed wood with internal LED lighting. Gives warm light and a unique atmosphere to any room.',
+    'ספסל גינה': 'A sturdy and beautiful garden bench made from reclaimed pallet wood. Suitable for a garden, balcony, entryway, or as a design piece in a living room.',
+    'שולחן סלון': 'An impressive living room table made from reclaimed carob wood. Every table is a unique creation with a story — the wood, the grain, the color — all preserved from the wood\'s previous life.',
+    'מסגרת תמונה': 'A rustic picture frame made from raw reclaimed wood. Gives a unique character to any photo and fits any design style.',
+    'קופסת אחסון': 'A storage box made from reclaimed pallet wood — functional and beautiful. Suitable for small storage in any room.',
+    'קונסולה כפרית': 'A wide console with 3 drawers, made from reclaimed wood in an aged white tone. Perfect for an entryway, living room or bedroom. Can be customized in size and color.',
+    'מתקן קערות לכלב': 'A designed dog bowl stand made from reclaimed wood with a personal engraving of the dog\'s name. A perfect gift for pet lovers. Can be customized for any name.',
+    'מציאה עם סיפור': 'A unique item with history — old wood given new life by hand. Every scratch and mark is part of its story.',
+    'מדף זוית 90 מעוצב': 'A designed 90° corner shelf made from reclaimed wood. A smart solution for corners — functional and stylish. Can be customized in size and color.',
+    'אדן רכבת צף': 'A floating rail-style window sill made from reclaimed wood. Adds a rustic, warm touch to any window or wall niche.',
+    'מנורת לילה': 'A handmade night lamp with color-changing LED lighting. Fully customizable design — a unique piece for any bedside or shelf.',
+    'שולחן קפה': 'A handmade coffee table from reclaimed wood. Every piece is one of a kind — the grain, the texture and the color tell the story of the wood\'s previous life.',
+    'שולחן צף עם חבלי פשתן': 'A floating table suspended with natural linen ropes, made from reclaimed wood. A unique blend of rustic and industrial style.',
+    'שלט home מעץ בניין': 'A HOME sign crafted from reclaimed construction wood. Each letter is hand-cut and finished — a warm, personal piece for any entrance or wall.',
+    'מתקן נייר טואלט X/O': 'A handmade X/O toilet paper holder from reclaimed wood. A playful and unique design that adds character to any bathroom.',
+    'שולחן סלון עם רגלי מסגרת': 'A living room table with welded frame legs, made from reclaimed wood. A bold industrial-rustic piece — every table is unique.',
+    'מתקן נייר טואלט XO': 'A handmade XO toilet paper holder from reclaimed wood. A playful and unique design that adds character to any bathroom.',
+  };
+
+  // ─── מערך מוצרים מרכזי — כאן מוסיפים ומורידים מוצרים בקלות ───
+  var products = [
+    { cat: 'מדפים', catEn: 'Shelves', title: 'מדף צף', titleEn: 'Floating Shelf', sub: 'קורת אורן בצבע טבעי', subEn: 'Natural Pine Beam', price: '₪420', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776265705/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E-%D7%94%D7%A0%D7%93%D7%99%D7%9E%D7%9F_%D7%99%D7%90%D7%99%D7%A8_7_xjdlqb.jpg', alt: 'מדף צף קורת אורן' },
+    { cat: 'מדפים', catEn: 'Shelves', title: 'מדף זוית 90 מעוצב', titleEn: '90° Corner Shelf', sub: 'מדף זוית 90 מעוצב', subEn: 'Designed corner shelf', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776265024/Gemini_Generated_Image_pkmqypkmqypkmqyp_kkasro.png', alt: 'מדף זוית 90 מעוצב' },
+    { cat: 'מדפים', catEn: 'Shelves', title: 'אדן רכבת צף', titleEn: 'Train-Style Floating Sill', sub: 'אדן רכבת צף', subEn: 'Floating rail sill', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776265176/Gemini_Generated_Image_18aoow18aoow18ao_zqf6wp.png', alt: 'אדן רכבת צף' },
+    { cat: 'מדפים', catEn: 'Shelves', title: 'מדף כפרי', titleEn: 'Rustic Shelf', sub: 'עץ גולמי ממוחזר', subEn: 'Raw reclaimed wood', price: '₪320', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776265326/Gemini_Generated_Image_3ewbay3ewbay3ewb_zfimri.png', alt: 'מדף כפרי' },
+    { cat: 'מעמדי נרות', catEn: 'Candle Holders', title: 'מעמד נרות', titleEn: 'Candle Holder', sub: 'עץ פלטה ממוחזר', subEn: 'Reclaimed pallet wood', price: '₪180', img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80&auto=format', alt: 'מעמד נרות' },
+    { cat: 'מעמדי נרות', catEn: 'Candle Holders', title: 'מעמד נרות גבוה', titleEn: 'Tall Candle Holder', sub: 'עץ זית ישן', subEn: 'Old olive wood', price: '₪240', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format', alt: 'מעמד נרות גבוה' },
+    { cat: 'מנורות', catEn: 'Lamps', title: 'מנורת W', titleEn: 'W Lamp', sub: 'עץ ממוחזר | עיצוב ייחודי', subEn: 'Reclaimed wood | Unique design', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776523721/Gemini_Generated_Image_ptymgqptymgqptym_xiqwnm.png', imgs: ['https://res.cloudinary.com/docgx6jic/image/upload/v1776523721/Gemini_Generated_Image_ptymgqptymgqptym_xiqwnm.png','https://res.cloudinary.com/docgx6jic/image/upload/v1776523693/Gemini_Generated_Image_doncf0doncf0donc_qdfjbu.png','https://res.cloudinary.com/docgx6jic/image/upload/v1776523672/Gemini_Generated_Image_8w82ut8w82ut8w82_cdmkxq.png'], alt: 'מנורת W' },
+    { cat: 'מנורות', catEn: 'Lamps', title: 'מנורת מסגרת', titleEn: 'Frame Lamp', sub: 'עץ ממוחזר | רגלי ברזל/עץ', subEn: 'Reclaimed wood | Iron/Wood legs', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776523634/Gemini_Generated_Image_5rr0yx5rr0yx5rr0_gqce14.png', alt: 'מנורת מסגרת' },
+    { cat: 'מנורות', catEn: 'Lamps', title: 'מנורת עמוד LED', titleEn: 'LED Pole Lamp', sub: 'עץ ממוחזר | תאורת LED', subEn: 'Reclaimed wood | LED lighting', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776523603/Gemini_Generated_Image_q9c770q9c770q9c7_senh6o.png', alt: 'מנורת עמוד LED' },
+    { cat: 'מנורות', catEn: 'Lamps', title: 'מנורת לילה', titleEn: 'Night Lamp', sub: 'תאורה צבעונית מתחלפת בעיצוב אישי', subEn: 'Color-changing light, custom design', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776265156/Gemini_Generated_Image_330ubk330ubk330u_xzyfte.png', alt: 'מנורת לילה' },
+    { cat: 'ריהוט', catEn: 'Furniture', title: 'שולחן סלון', titleEn: 'Living Room Table', sub: 'עץ חרוב ממוחזר', subEn: 'Reclaimed carob wood', price: '₪1,200', img: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80&auto=format', alt: 'שולחן קפה', badge: 'מכור', badgeEn: 'Sold' },
+    { cat: 'ריהוט', catEn: 'Furniture', title: 'שולחן קפה', titleEn: 'Coffee Table', sub: 'עץ ממוחזר | עבודת יד', subEn: 'Reclaimed wood | Handmade', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776265685/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E-%D7%94%D7%A0%D7%93%D7%99%D7%9E%D7%9F_%D7%99%D7%90%D7%99%D7%A8_8_qw9eba.jpg', alt: 'שולחן קפה' },
+    { cat: 'ריהוט', catEn: 'Furniture', title: 'שולחן צף עם חבלי פשתן', titleEn: 'Floating Table with Linen Ropes', sub: 'שולחן צף עם חבלי פשתן', subEn: 'Floating table with linen ropes', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776264649/Gemini_Generated_Image_w54orhw54orhw54o_thlnh5.png', alt: 'שולחן צף עם חבלי פשתן' },
+    { cat: 'לייף סטייל', catEn: 'Lifestyle', title: 'קונסולה כפרית', titleEn: 'Rustic Console', sub: 'עץ ממוחזר | 3 מגירות', subEn: 'Reclaimed wood | 3 drawers', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776526432/IMG-20190703-WA0018_ybxxca.jpg', alt: 'קונסולה כפרית' },
+    { cat: 'לייף סטייל', catEn: 'Lifestyle', title: 'מתקן קערות לכלב', titleEn: 'Dog Bowl Stand', sub: 'מתקן לקערות אוכל ומים לכלב עם פאנל מתהפך לבחירה בין שני צבעים עם חריטה אישית', subEn: 'Dog food & water bowl stand with reversible panel, two color options, custom engraving', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776021652/Gemini_Generated_Image_j92yg2j92yg2j92y_ti4tri.png', alt: 'מתקן קערות לכלב' },
+    { cat: 'לייף סטייל', catEn: 'Lifestyle', title: 'שלט home מעץ בניין', titleEn: 'HOME Sign from Construction Wood', sub: 'שלט home מעץ בניין', subEn: 'HOME sign from construction wood', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776349836/Gemini_Generated_Image_f5sdtsf5sdtsf5sd_pfc877.png', alt: 'שלט home מעץ בניין' },
+    { cat: 'לייף סטייל', catEn: 'Lifestyle', title: 'מתקן נייר טואלט X/O', titleEn: 'X/O Toilet Paper Holder', sub: 'עץ ממוחזר | עבודת יד', subEn: 'Reclaimed wood | Handmade', price: 'לפרטים צרו קשר', priceEn: 'Contact for details', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776282940/Gemini_Generated_Image_dd90ksdd90ksdd90_tr3pjv.png', alt: 'מתקן נייר טואלט X/O' },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שולחן סלון עם רגלי מסגרת', titleEn: 'Living Room Table with Frame Legs', sub: 'עץ ממוחזר | רגלי מסגרת', subEn: 'Reclaimed wood | Frame legs', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776093795/IMG_20260413_123134_898_y363w7.jpg', alt: 'שולחן סלון עם רגלי מסגרת', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'מתקן נייר טואלט XO', titleEn: 'XO Toilet Paper Holder', sub: 'עץ ממוחזר | עיצוב ייחודי', subEn: 'Reclaimed wood | Unique design', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776545261/Gemini_Generated_Image_nvrnftnvrnftnvrn_ic9g1o.png', alt: 'מתקן נייר טואלט XO', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 1', titleEn: 'Customer 1', sub: '"ציטוט של לקוח 1"', subEn: '"Customer 1 quote"', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776544114/Gemini_Generated_Image_4i3jmo4i3jmo4i3j_k7k3pq.png', alt: 'עבודה ללקוח 1', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 2', titleEn: 'Customer 2', sub: '"ציטוט של לקוח 2"', subEn: '"Customer 2 quote"', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776021661/Gemini_Generated_Image_rzc998rzc998rzc9_jktu9h.png', alt: 'עבודה ללקוח 2', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 3', titleEn: 'Customer 3', sub: '"ציטוט של לקוח 3"', subEn: '"Customer 3 quote"', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776023164/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E-%D7%94%D7%A0%D7%93%D7%99%D7%9E%D7%9F_%D7%99%D7%90%D7%99%D7%A8_5_qke6k0.jpg', alt: 'עבודה ללקוח 3', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 4', titleEn: 'Customer 4', sub: '"ציטוט של לקוח 4"', subEn: '"Customer 4 quote"', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776021648/5ee7caf1-a129-413d-9ec2-e02bb2a9a6a5_fsec7v.jpg', alt: 'עבודה ללקוח 4', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 5', titleEn: 'Customer 5', sub: '"ציטוט של לקוח 5"', subEn: '"Customer 5 quote"', price: '', img: 'https://res.cloudinary.com/docgx6jic/image/upload/v1776021660/Gemini_Generated_Image_ljjkplljjkplljjk_m7iqsj.png', alt: 'עבודה ללקוח 5', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 6', titleEn: 'Customer 6', sub: '"ציטוט של לקוח 6"', subEn: '"Customer 6 quote"', price: '', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format', alt: 'עבודה ללקוח 6', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 7', titleEn: 'Customer 7', sub: '"ציטוט של לקוח 7"', subEn: '"Customer 7 quote"', price: '', img: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&q=80&auto=format', alt: 'עבודה ללקוח 7', customer: true },
+    { cat: 'לקוחות מדברים', catEn: 'Testimonials', title: 'שם לקוח 8', titleEn: 'Customer 8', sub: '"ציטוט של לקוח 8"', subEn: '"Customer 8 quote"', price: '', img: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=600&q=80&auto=format', alt: 'עבודה ללקוח 8', customer: true }
+  ];
+
+  var mainContent = [];
+  var lastClickedCard = null;
+  var lastActiveWrap = null;
+
+  // Gallery images per product
+  var productGalleries = {
+    'קונסולה כפרית': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776526432/IMG-20190703-WA0018_ybxxca.jpg'
+    ],
+    'מנורת עמוד LED': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523603/Gemini_Generated_Image_q9c770q9c770q9c7_senh6o.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523612/Gemini_Generated_Image_wprxwfwprxwfwprx_o0iisu.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523566/Gemini_Generated_Image_k5sbnkk5sbnkk5sb_pldnit.png'
+    ],
+    'מנורת מסגרת': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523634/Gemini_Generated_Image_5rr0yx5rr0yx5rr0_gqce14.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523647/Gemini_Generated_Image_1wqbh71wqbh71wqb_xhdzrp.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523583/Gemini_Generated_Image_e1vaa4e1vaa4e1va_pb89eg.png'
+    ],
+    'מנורת W': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523721/Gemini_Generated_Image_ptymgqptymgqptym_xiqwnm.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523693/Gemini_Generated_Image_doncf0doncf0donc_qdfjbu.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776523672/Gemini_Generated_Image_8w82ut8w82ut8w82_cdmkxq.png'
+    ],
+    'שלט home מעץ בניין': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776349836/Gemini_Generated_Image_f5sdtsf5sdtsf5sd_pfc877.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776345558/Gemini_Generated_Image_i940hmi940hmi940_npqjs3.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776345531/Gemini_Generated_Image_iqfl8jiqfl8jiqfl_gapata.png'
+    ],
+    'מתקן קערות לכלב': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776021652/Gemini_Generated_Image_j92yg2j92yg2j92y_ti4tri.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776317587/Gemini_Generated_Image_v1899vv1899vv189_b1g3xx.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776317563/Gemini_Generated_Image_4li7vj4li7vj4li7_t9ubkv.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776317432/Gemini_Generated_Image_h0lfl7h0lfl7h0lf_uiig6s.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776317376/Gemini_Generated_Image_sbp6ftsbp6ftsbp6_ephcxy.png'
+    ],
+    'מתקן נייר טואלט X/O': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776282940/Gemini_Generated_Image_dd90ksdd90ksdd90_tr3pjv.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265326/Gemini_Generated_Image_3ewbay3ewbay3ewb_zfimri.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265220/Gemini_Generated_Image_sgglesgglesggles_hbpoek.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776091137/IMG_20260413_123546_937_hfxaxt.jpg'
+    ],
+    'אדן רכבת צף': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265176/Gemini_Generated_Image_18aoow18aoow18ao_zqf6wp.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776283779/Gemini_Generated_Image_5dmj875dmj875dmj_fsmvld.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265025/Gemini_Generated_Image_lwpmknlwpmknlwpm_hetbkg.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265103/Gemini_Generated_Image_bg32orbg32orbg32_syrk7s.png'
+    ],
+    'מנורת לילה': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776229736/Gemini_Generated_Image_oknbdxoknbdxoknb_wbw4fu.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265156/Gemini_Generated_Image_330ubk330ubk330u_xzyfte.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776229778/Gemini_Generated_Image_cxr6xhcxr6xhcxr6_ekxtxw.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265024/Gemini_Generated_Image_ataprgataprgatap_pidzpe.png'
+    ],
+    'שולחן קפה': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265685/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E-%D7%94%D7%A0%D7%93%D7%99%D7%9E%D7%9F_%D7%99%D7%90%D7%99%D7%A8_8_qw9eba.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776284479/Gemini_Generated_Image_x3e2z2x3e2z2x3e2_lmqysp.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776284497/Gemini_Generated_Image_b6ds0bb6ds0bb6ds_ywbkvv.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776284453/Gemini_Generated_Image_qgx5ghqgx5ghqgx5_esbqdy.png'
+    ],
+    'מדף זוית 90 מעוצב': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265024/Gemini_Generated_Image_pkmqypkmqypkmqyp_kkasro.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776345607/Gemini_Generated_Image_vs1mt4vs1mt4vs1m_vhgjko.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776345580/Gemini_Generated_Image_l16bmfl16bmfl16b_ahx2c7.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776345594/Gemini_Generated_Image_67nr8c67nr8c67nr_ugprtt.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776525729/Gemini_Generated_Image_4zdu8u4zdu8u4zdu_oiur2h.png'
+    ],
+    'מדף כפרי': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265326/Gemini_Generated_Image_3ewbay3ewbay3ewb_zfimri.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776186251/Gemini_Generated_Image_e1nouoe1nouoe1no_w1cegp.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776091137/IMG_20260413_123546_937_hfxaxt.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776333703/Gemini_Generated_Image_90jh6990jh6990jh_e0s9wz.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776333718/Gemini_Generated_Image_bstrexbstrexbstr_k59zte.png'
+    ],
+    'מדף צף': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265705/%D7%AA%D7%9E%D7%95%D7%A0%D7%94_%D7%9E-%D7%94%D7%A0%D7%93%D7%99%D7%9E%D7%9F_%D7%99%D7%90%D7%99%D7%A8_7_xjdlqb.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265654/Gemini_Generated_Image_z80rxfz80rxfz80r_kbisam.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776282232/Gemini_Generated_Image_yqus6ryqus6ryqus_ly5jpy.png',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776282198/Gemini_Generated_Image_px9qw4px9qw4px9q_ggzgak.png'
+    ],
+    'שולחן סלון עם רגלי מסגרת': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776093795/IMG_20260413_123134_898_y363w7.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776093796/IMG_20260413_123123_065_aw24ad.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776093796/IMG_20260413_123128_746_clrm3h.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776265024/Gemini_Generated_Image_sbgw0ssbgw0ssbgw_tfus8w.png'
+    ],
+    'שם לקוח 4': [
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776021648/5ee7caf1-a129-413d-9ec2-e02bb2a9a6a5_fsec7v.jpg',
+      'https://res.cloudinary.com/docgx6jic/image/upload/v1776021648/ea632e7e-0258-4e3b-91a7-414372383c38_sf1eoj.jpg'
+    ],
+    'מציאה עם סיפור': [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format',
+      'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=800&q=80&auto=format',
+      'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80&auto=format'
+    ]
+  };
+
+  function openPage(prodOrImg, cardEl, sub, price) {
+    // Support both old-style openPage(img,title,sub,price,card) and new openPage(prod,card)
+    var prod, img, title;
+    if (typeof prodOrImg === 'object' && prodOrImg.title) {
+      prod = prodOrImg;
+      img = prod.img;
+      title = prod.title;
+      sub = prod.sub;
+      price = prod.price || '';
+    } else {
+      img = prodOrImg;
+      title = cardEl; cardEl = sub; sub = price; price = arguments[4];
+    }
+    lastClickedCard = cardEl;
+    if (prod) window._currentProd = prod;
+    mainContent.forEach(function(el) { el.style.display = 'none'; });
+
+    var displayTitle = (currentLang === 'en' && prod && prod.titleEn) ? prod.titleEn : title;
+    var displaySub   = (currentLang === 'en' && prod && prod.subEn)   ? prod.subEn   : sub;
+    var displayPrice = (currentLang === 'en' && prod && prod.priceEn) ? prod.priceEn : price;
+
+    var gallery = productGalleries[title];
+    if (gallery && gallery.length > 1) {
+      document.getElementById('ppImg').style.display = 'none';
+      var galleryEl = document.getElementById('ppGallery');
+      galleryEl.style.display = '';
+      var mainImg = document.getElementById('ppMainImg');
+      mainImg.src = gallery[0];
+      var thumbsEl = document.getElementById('ppThumbs');
+      thumbsEl.innerHTML = '';
+      window._currentGallery = gallery;
+      gallery.forEach(function(src, i) {
+        var t = document.createElement('img');
+        t.src = src;
+        t.style.cssText = 'width:80px; height:60px; object-fit:contain; background:rgba(0,0,0,0.2); cursor:pointer; opacity:' + (i === 0 ? '1' : '0.5') + '; transition:opacity 0.2s;';
+        t.onclick = (function(s, idx) { return function() {
+          mainImg.src = s;
+          thumbsEl.querySelectorAll('img').forEach(function(x) { x.style.opacity = '0.5'; });
+          t.style.opacity = '1';
+          openLightbox(s, window._currentGallery, idx);
+        }; })(src, i);
+        thumbsEl.appendChild(t);
+      });
+    } else {
+      window._currentGallery = [img];
+      document.getElementById('ppImg').style.display = '';
+      document.getElementById('ppImg').src = img;
+      document.getElementById('ppGallery').style.display = 'none';
+    }
+    document.getElementById('ppTitle').textContent = displayTitle;
+    document.getElementById('ppSub').textContent = displaySub;
+
+    var priceEl = document.getElementById('ppPrice');
+    if (displayPrice && displayPrice !== 'לפרטים צרו קשר' && displayPrice !== 'Contact for details') {
+      priceEl.textContent = displayPrice;
+      priceEl.style.display = '';
+    } else {
+      priceEl.textContent = '';
+      priceEl.style.display = 'none';
+    }
+    var waRow = document.getElementById('ppWaRow');
+    if (price === '') {
+      if (waRow) waRow.style.display = 'none';
+      document.getElementById('ppDesc').textContent = '';
+    } else {
+      if (waRow) waRow.style.display = '';
+      var descObj = currentLang === 'en' ? (productDescsEn[title] || 'A unique handmade item from reclaimed wood. Every piece is one of a kind.') : (productDescs[title] || 'פריט ייחודי עשוי מעץ ממוחזר בעבודת יד. כל מוצר הוא יחיד במינו.');
+      document.getElementById('ppDesc').textContent = descObj;
+      var text = 'שלום יאיר! אני מעוניין/ת במוצר: ' + title + '. אשמח לפרטים נוספים.';
+      document.getElementById('ppWa').onclick = function() { window.location.href = 'https://wa.me/972544982928?text=' + encodeURIComponent(text); };
+    }
+
+    document.getElementById('product-page').classList.add('open');
+    document.body.style.overflow = '';
+    var worksEl = document.getElementById('works');
+    if (worksEl) worksEl.style.overflowY = 'hidden';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function closePage() {
+    document.getElementById('product-page').classList.remove('open');
+    var worksEl = document.getElementById('works');
+    if (worksEl) {
+      worksEl.style.overflowY = 'auto';
+      worksEl.style.display = '';
+    }
+    document.body.style.overflow = '';
+    if (lastClickedCard) {
+      setTimeout(function() {
+        lastClickedCard.scrollIntoView({ block: 'center', behavior: 'instant' });
+      }, 50);
+    }
+  }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.work-card').forEach(function(card) {
+      if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    var disclaimer = document.getElementById('works-disclaimer');
+    if (disclaimer) {
+      disclaimer.style.display = (cat === 'לקוחות מדברים') ? 'none' : '';
+    }
+  }
+
+  // Page navigation
+  var pages = ['hero','story','works','process','contact','metziot'];
+
+  function showPage(pageId) {
+    document.getElementById('product-page').classList.remove('open');
+    pages.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) { el.style.display = 'none'; el.style.position = ''; }
+    });
+    var footer = document.querySelector('footer');
+    if (footer) footer.style.display = 'none';
+
+    var target = document.getElementById(pageId);
+    if (target) {
+      target.style.display = '';
+      if (pageId === 'works') {
+        target.scrollTop = 0;
+        document.body.style.overflow = '';
+        var heroEl = document.getElementById('hero');
+        if (heroEl) heroEl.style.display = 'none';
+      } else {
+        document.body.style.overflow = '';
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    }
+
+    if (pageId === 'contact' && footer) footer.style.display = '';
+
+    document.querySelectorAll('.nav-link').forEach(function(a) {
+      a.classList.remove('active');
+    });
+    var active = document.querySelector('.nav-link[onclick*="' + pageId + '"]');
+    if (active) active.classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  function renderCards(lang) {
+    var grid = document.getElementById('works-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    var activeCat = document.querySelector('.cat-btn.active');
+    var currentCat = activeCat ? activeCat.getAttribute('data-cat-he') || 'all' : 'all';
+    products.forEach(function(p) {
+      var card = document.createElement('div');
+      card.className = 'work-card';
+      card.setAttribute('data-cat', p.cat);
+      var title = (lang === 'en' && p.titleEn) ? p.titleEn : p.title;
+      var sub   = (lang === 'en' && p.subEn)   ? p.subEn   : p.sub;
+      var price = (lang === 'en' && p.priceEn)  ? p.priceEn : p.price;
+      var badge = p.badge ? '<span class="work-badge">' + ((lang === 'en' && p.badgeEn) ? p.badgeEn : p.badge) + '</span>' : '';
+      card.onclick = (function(prod, c) { return function() { openPage(prod, c); }; })(p, card);
+      if (p.customer) {
+        card.innerHTML = '<img alt="' + p.alt + '" src="' + p.img + '"/>' + badge +
+          '<div class="work-card-info">' +
+          '<div class="work-card-sub" style="font-style:italic; color:rgba(245,237,224,0.9); margin-bottom:0.4rem;">' + sub + '</div>' +
+          '<div class="work-card-title" style="font-size:1rem; color:var(--gold);">— ' + title + '</div></div>';
+      } else {
+        card.innerHTML = '<img alt="' + p.alt + '" src="' + p.img + '"/>' + badge +
+          '<div class="work-card-info"><div class="work-card-title">' + title + '</div>' +
+          '<div class="work-card-sub">' + sub + '</div>' +
+          '<div class="work-card-price">' + price + '</div></div>';
+      }
+      if (currentCat !== 'all' && p.cat !== currentCat) card.style.display = 'none';
+      grid.appendChild(card);
+    });
+  }
+
+  // Init on load
+  window.onload = function() {
+    // רינדור כרטיסי מוצרים
+    renderCards('he');
+
+    ['#hero','#story','#works','#process','#contact','#metziot','footer'].forEach(function(sel) {
+      var el = document.querySelector(sel);
+      if (el) mainContent.push(el);
+    });
+
+    pages.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    var footer = document.querySelector('footer');
+    if (footer) footer.style.display = 'none';
+
+    var hero = document.getElementById('hero');
+    if (hero) hero.style.display = '';
+  };
+
+  function sendContactWA() {
+    var n = document.getElementById('wa-name').value.trim();
+    var p = document.getElementById('wa-phone').value.trim();
+    var m = document.getElementById('wa-message').value.trim();
+    if (!n) { alert('אנא הזן שם מלא'); return; }
+    if (!p) { alert('אנא הזן מספר טלפון'); return; }
+    var t = 'שלום יאיר! קוראים לי ' + n + ', מספרי ' + p + (m ? '.\n\n' + m : '.');
+    window.location.href = 'https://wa.me/972544982928?text=' + encodeURIComponent(t);
+  }
+
+  
+  </script>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <script type="text/javascript">
+    var currentLang = 'he';
+
+    var translations = {
+      nav: {
+        he: ['הסיפור שלי', 'תהליך', 'עבודות', 'מציאות עם סיפור', 'יצירת קשר'],
+        en: ['My Story', 'Process', 'Works', 'Findings with a Story', 'Contact']
+      },
+      cats: {
+        he: ['הכל', 'מדפים', 'מעמדי נרות', 'מנורות', 'ריהוט', 'לייף סטייל', 'לקוחות מדברים'],
+        en: ['All', 'Shelves', 'Candle Holders', 'Lamps', 'Furniture', 'Lifestyle', 'Testimonials']
+      },
+      metziot: {
+        he: { label: 'פריטים מיוחדים', title: 'מציאות', span: 'עם סיפור', sub: 'פריטים יחידים במינם — כל אחד עם היסטוריה, אופי וחיים קודמים.' },
+        en: { label: 'Special Items', title: 'Findings', span: 'with a Story', sub: 'One-of-a-kind items — each with history, character, and a previous life.' }
+      },
+      process: {
+        he: {
+          label: "התהליך שלי",
+          titleMain: "איך זה",
+          titleSpan: " עובד?",
+          sub: "מהרעיון הראשוני ועד למוצר המוכן — כל שלב נעשה ביד ובלב.",
+          steps: [
+            { title: "איתור ואיסוף העץ", desc: "כל פרויקט מתחיל בשטח — מחפש, מוצא ואוסף עץ ממוחזר עם אופי: משטחים, ריהוט ישן, קורות בניין וגזמי עצים." },
+            { title: "פירוק ועיבוד ראשוני", desc: "העץ עובר פירוק, ניקוי והסרת מסמרים ועצמים אחרים — ואז חיתוך וסידור ראשוני לפי צרכי הפרויקט." },
+            { title: "עבודת יד", desc: "כל חיתוך, ליטוש ועיבוד נעשה ביד, בסדנה הפרטית שלי — ללא פס ייצור." },
+            { title: "המוצר אצלכם", desc: "בסיום — משלוח או איסוף עצמי, ומוצר שמגיע עם סיפור ויחיד במינו." }
+          ]
+        },
+        en: {
+          label: "My Process",
+          titleMain: "How It",
+          titleSpan: " Works",
+          sub: "From the first idea to the finished piece — every step is made by hand and with heart.",
+          steps: [
+            { title: "Finding the Wood", desc: "Every project starts in the field — searching, finding, and collecting reclaimed wood with character: pallets, old furniture, construction beams, and tree cuttings." },
+            { title: "Dismantling & Initial Processing", desc: "The wood is dismantled, cleaned, and cleaned of nails and other embedded objects — then cut and sorted according to the project needs." },
+            { title: "Handcrafting", desc: "Every cut, sanding, and finishing touch is done by hand in my private workshop — no assembly line." },
+            { title: "Delivered to You", desc: "When done — shipping or self-pickup, and a piece that arrives with a story, one of a kind." }
+          ]
+        }
+      },
+      contact: {
+        he: { title: 'יש לך', span: 'רעיון?', sub: 'הזמינו פריט קיים, או בואו נבנה יחד משהו חדש ומיוחד.', name: 'שם מלא *', phone: 'טלפון / ווטסאפ *', msg: 'ספרו לי מה אתם מחפשים...', btn: 'שלח לי וואטסאפ' },
+        en: { title: 'Got an', span: 'Idea?', sub: "Let's build something special together.", name: 'Full Name *', phone: 'Phone / WhatsApp *', msg: "Tell me what you're looking for...", btn: 'Send me a WhatsApp' }
+      },
+      footer: {
+        he: '© 2024 YR POLAT · כל הזכויות שמורות · עץ ממוחזר, עבודת יד, ישראל',
+        en: '© 2024 YR POLAT · All rights reserved · Recycled Wood, Handmade, Israel'
+      },
+      orderLabel: { he: 'לפרטים והזמנה:', en: 'For details & ordering:' },
+      backBtn: { he: 'חזרה לגלריה', en: 'Back to Gallery' },
+      story: {
+        he: {
+          title: 'שלום, אני',
+          titleSpan: 'יאיר.',
+          p1: 'אני אבא גרוש לשלושה ילדים, ויחד עם בת הזוג שלי — הם העוגן, הכוח ומרכז החיים שלי. מתוך המקום הזה של בית, משפחה ואהבה, נולד גם החיבור העמוק שלי ליצירה, לחום ולפריטים שמספרים סיפור.',
+          p2a: 'אני משרת במילואים באופן קבוע כבר משנת ',
+          p2b: '2002',
+          p2c: ', ומאז תחילת המלחמה השירות הפך לאינטנסיבי במיוחד — בממוצע ',
+          p2d: 'כ־200 ימי מילואים בכל שנת לחימה',
+          p2e: ' בגדוד ההנדסה של חטיבת אלכסנדרוני. במקביל, העסק שלי כהנדימן נפגע קשות וכמעט נעצר לחלוטין.',
+          p3a: 'בתוך סבבי המילואים, וברגעים שהייתי חוזר הביתה אל מציאות של חוסר ודאות, מצאתי בעץ את המפלט שלי. ברגעים שבהם הילדים לא היו איתי ובת הזוג הייתה בעבודה — ',
+          p3b: 'העץ היה המקום השקט שלי',
+          p3c: '. מקום לנשום, ליצור, לפרוק, ולהחזיר לעצמי תחושת יציבות ומשמעות.',
+          p4a: 'מה שהתחיל כאהבה ישנה לעץ ולעבודת יד, הפך בתקופה הזו להרבה יותר מתחביב — ',
+          p4b: 'דרך להמשיך לפרנס, להחזיק את הבית, ולבנות מחדש',
+          p4c: ' דווקא מתוך תקופה מורכבת.',
+          p5a: 'כל היצירות ב־ReWood Israel מיוצרות מ־100% עץ ממוחזר — ממשטחים, ריהוט ישן, עץ בניין וגזמי עצים. רוב המוצרים ניתנים ל',
+          p5b: 'התאמה אישית מלאה',
+          p5c: ' — מידות, צבעים ופונקציונליות — בתהליך משותף שמבטיח תוצאה מדויקת ואישית.',
+          p6a: 'בשבילי, כל מוצר הוא הרבה יותר מפריט עיצוב.',
+          p6b: 'הוא סיפור של חומר שקיבל חיים חדשים, של עבודת יד ישראלית, ושל מקום שמצאתי בו שקט, יצירה ויכולת לבנות מחדש — גם את העץ, וגם את החיים.',
+          closing: 'עץ ישן — חיים חדשים.',
+          contact: 'צרו קשר:'
+        },
+        en: {
+          title: 'Hello, I\'m',
+          titleSpan: 'Yair.',
+          p1: 'I\'m a divorced father of three children, and together with my partner, they are my anchor, my strength, and the center of my life. From this place of home, family, and love, my deep connection to craftsmanship, warmth, and pieces that carry a story was born.',
+          p2a: 'I have been serving regularly in the military reserves since ',
+          p2b: '2002',
+          p2c: ', and since the beginning of the war, that service has become especially intense — averaging around ',
+          p2d: '200 reserve duty days each year of combat',
+          p2e: ' with the Engineering Battalion of the Alexandroni Brigade. At the same time, my handyman business was hit hard and nearly came to a complete stop.',
+          p3a: 'Between reserve duty rotations, in the moments I returned home to a reality of uncertainty, I found refuge in wood. During the times when my children were not with me and my partner was at work — ',
+          p3b: 'wood became my quiet place',
+          p3c: ' — a space to breathe, create, release, and regain a sense of stability and meaning.',
+          p4a: 'What began as a long-time love for wood and handcrafted work became, during this period, much more than a hobby — ',
+          p4b: 'a way to continue providing for my family, support my home, and rebuild',
+          p4c: ' from within a deeply challenging chapter of life.',
+          p5a: 'Every creation at ReWood Israel is made from 100% reclaimed wood — sourced from pallets, old furniture, construction timber, and tree cuttings. Most pieces can be ',
+          p5b: 'fully customized',
+          p5c: ' in size, color, and functionality through a collaborative process that ensures a precise and deeply personal result.',
+          p6a: 'For me, every product is far more than a design piece.',
+          p6b: 'It is a story of material given a second life, of Israeli craftsmanship, and of a place where I found peace, creativity, and the ability to rebuild — both the wood, and life itself.',
+          closing: 'Old wood — new life.',
+          contact: 'Contact:'
+        }
+      }
+    };
+
+    function toggleLang() {
+      var btn = document.getElementById('lang-btn');
+      if (currentLang === 'he') {
+        currentLang = 'en';
+        btn.textContent = 'עב | EN';
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+      } else {
+        currentLang = 'he';
+        btn.textContent = 'EN | עב';
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'he');
+      }
+      applyLang(currentLang);
+    }
+
+    function applyLang(lang) {
+      var t = translations;
+
+      // Nav links
+      document.querySelectorAll('.nav-link').forEach(function(el, i) {
+        if (t.nav[lang][i] !== undefined) el.textContent = t.nav[lang][i];
+      });
+
+      // Category buttons
+      document.querySelectorAll('.cat-btn').forEach(function(el, i) {
+        if (t.cats[lang][i] !== undefined) el.textContent = t.cats[lang][i];
+      });
+
+      // Metziot section
+      var metzLabel = document.querySelector('#metziot .section-label');
+      if (metzLabel) metzLabel.textContent = t.metziot[lang].label;
+      var metzTitle = document.querySelector('#metziot .section-title');
+      if (metzTitle) {
+        metzTitle.firstChild.textContent = t.metziot[lang].title + ' ';
+        var sp = metzTitle.querySelector('span');
+        if (sp) sp.textContent = t.metziot[lang].span;
+      }
+      var metzP = document.querySelector('#metziot p');
+      if (metzP) metzP.textContent = t.metziot[lang].sub;
+
+      // Contact section
+      var contTitle = document.querySelector('#contact .section-title');
+      if (contTitle) {
+        contTitle.firstChild.textContent = t.contact[lang].title + ' ';
+        var sp = contTitle.querySelector('span');
+        if (sp) sp.textContent = t.contact[lang].span;
+      }
+      var contP = document.querySelector('#contact p');
+      if (contP) contP.textContent = t.contact[lang].sub;
+      var contBtn = document.querySelector('#contact button span:first-child');
+      if (contBtn) contBtn.textContent = t.contact[lang].btn;
+      var nameEl = document.getElementById('wa-name');
+      if (nameEl) nameEl.placeholder = t.contact[lang].name;
+      var phoneEl = document.getElementById('wa-phone');
+      if (phoneEl) phoneEl.placeholder = t.contact[lang].phone;
+      var msgEl = document.getElementById('wa-message');
+      if (msgEl) msgEl.placeholder = t.contact[lang].msg;
+
+      // Footer
+      var footerEl = document.querySelector('footer');
+      if (footerEl) footerEl.textContent = t.footer[lang];
+
+      // Product page - order label
+      var orderEl = document.querySelector('#ppWaRow > span');
+      if (orderEl) orderEl.textContent = t.orderLabel[lang];
+
+      // Product page - back button
+      var backEl = document.querySelector('a[onclick="closePage()"]');
+      if (backEl) {
+        backEl.innerHTML = '<span style="font-size:2rem;line-height:1;font-weight:900;">&#9658;</span> ' + t.backBtn[lang];
+      }
+
+      // Process section
+      var pr = t.process[lang];
+      var procLabel = document.getElementById("process-label");
+      if (procLabel) procLabel.textContent = pr.label;
+      var procTitleMain = document.getElementById("process-title-main");
+      if (procTitleMain) procTitleMain.textContent = pr.titleMain;
+      var procTitleSpan = document.getElementById("process-title-span");
+      if (procTitleSpan) procTitleSpan.textContent = pr.titleSpan;
+      var procSub = document.getElementById("process-sub");
+      if (procSub) procSub.textContent = pr.sub;
+      [1,2,3,4].forEach(function(i) {
+        var titleEl = document.getElementById("step" + i + "-title");
+        var descEl = document.getElementById("step" + i + "-desc");
+        if (titleEl) titleEl.textContent = pr.steps[i-1].title;
+        if (descEl) descEl.textContent = pr.steps[i-1].desc;
+      });
+
+      // Story section
+      var s = t.story[lang];
+      var storyTitle = document.querySelector('#story .section-title');
+      if (storyTitle) {
+        storyTitle.firstChild.textContent = s.title + ' ';
+        var stSp = storyTitle.querySelector('span');
+        if (stSp) stSp.textContent = s.titleSpan;
+      }
+      var storyPs = document.querySelectorAll('#story .reveal p');
+      if (storyPs.length >= 5) {
+        storyPs[0].textContent = s.p1;
+        storyPs[1].innerHTML = s.p2a + '<strong style="color:var(--gold-light); font-weight:400;">' + s.p2b + '</strong>' + s.p2c + '<strong style="color:var(--gold-light); font-weight:400;">' + s.p2d + '</strong>' + s.p2e;
+        storyPs[2].innerHTML = s.p3a + '<strong style="color:var(--gold-light); font-weight:400;">' + s.p3b + '</strong>' + s.p3c;
+        storyPs[3].innerHTML = s.p4a + '<strong style="color:var(--gold-light); font-weight:400;">' + s.p4b + '</strong>' + s.p4c;
+        storyPs[4].innerHTML = s.p5a + '<strong style="color:var(--gold-light); font-weight:400;">' + s.p5b + '</strong>' + s.p5c;
+      }
+      var storyClosingDiv = document.querySelector('#story .reveal div');
+      if (storyClosingDiv) {
+        var closingPs = storyClosingDiv.querySelectorAll('p');
+        if (closingPs[0]) closingPs[0].textContent = s.p6a;
+        if (closingPs[1]) closingPs[1].textContent = s.p6b;
+      }
+      var storyClosing = document.querySelector('#story > div > p');
+      if (storyClosing) storyClosing.textContent = s.closing;
+      var storyContact = document.querySelector('#story .reveal div[style*="align-items"] span');
+      if (storyContact) storyContact.textContent = s.contact;
+
+      // Works title
+      var worksTitleMain = document.getElementById('works-title-main');
+      if (worksTitleMain) worksTitleMain.textContent = lang === 'en' ? 'Selected ' : 'עבודות';
+      var worksTitleSpan = document.getElementById('works-title-span');
+      if (worksTitleSpan) worksTitleSpan.textContent = lang === 'en' ? 'Works' : 'נבחרות';
+
+      // Re-render works cards in new language
+      renderCards(lang);
+
+      // If product page is open, refresh its content
+      if (document.getElementById('product-page').classList.contains('open') && window._currentProd) {
+        var p = window._currentProd;
+        document.getElementById('ppTitle').textContent = (lang === 'en' && p.titleEn) ? p.titleEn : p.title;
+        document.getElementById('ppSub').textContent   = (lang === 'en' && p.subEn)   ? p.subEn   : p.sub;
+        var descObj = lang === 'en' ? (productDescsEn[p.title] || 'A unique handmade item from reclaimed wood. Every piece is one of a kind.') : (productDescs[p.title] || 'פריט ייחודי עשוי מעץ ממוחזר בעבודת יד. כל מוצר הוא יחיד במינו.');
+        document.getElementById('ppDesc').textContent = descObj;
+      }
+    }
+  var _lbGallery = [];
+  var _lbIndex = 0;
+
+  function openLightbox(src, gallery, index) {
+    _lbGallery = gallery || [src];
+    _lbIndex = (index !== undefined) ? index : 0;
+    document.getElementById('lightbox-img').src = _lbGallery[_lbIndex];
+    document.getElementById('lightbox-prev').style.display = _lbGallery.length > 1 ? '' : 'none';
+    document.getElementById('lightbox-next').style.display = _lbGallery.length > 1 ? '' : 'none';
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function lightboxNav(dir) {
+    _lbIndex = (_lbIndex + dir + _lbGallery.length) % _lbGallery.length;
+    document.getElementById('lightbox-img').src = _lbGallery[_lbIndex];
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft')  lightboxNav(1);
+    if (e.key === 'ArrowRight') lightboxNav(-1);
+  });
+  </script>
+
+
+  
+ </body>
+</html>
